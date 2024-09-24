@@ -1,0 +1,37 @@
+body {
+    background-color: black;
+    background-image: url(images/newback.jpg);
+    background-position: center center;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #080602;
+
+
+}
+
+#butn a {
+    text-decoration: none;
+    color: black;
+}
+
+#images {
+    background-color: rgba(255, 255, 255, 0.154);
+    border-radius: 5px;
+}
+
+#images img {
+    width: 200px;
+    height: 200px;
+}
+
+#images a {
+    text-decoration: none;
+    color: black;
+}
+
+#images a:hover {
+
+    color: rgb(255, 255, 255);
+}

@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    background-image: url(images/newback.jpg);
+    background-position: center center;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #080602;
+
+
+}
+
+#track {
+
+    background-color: rgba(255, 255, 255, 0.52);
+    border-radius: 5px;
+
+}
+
+#myinput {
+    background: linear-gradient(to right, #02c118 0%, #aaf049 50%, #f1cd3c 50%, #ef0606 100%);
+}

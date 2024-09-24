@@ -1,0 +1,82 @@
+body {
+    background-color: black;
+    background-image: url(images/newback.jpg);
+    background-position: center center;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #080602;
+
+
+}
+
+#quik {
+    background-color: rgba(255, 255, 255, 0.166);
+    border-radius: 5px;
+}
+
+#quik a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+#quik img {
+    border-radius: 5px;
+}
+
+#pmr a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.timer {
+    background-color: rgba(194, 216, 233, 0.706);
+    width: 200px;
+    height: auto;
+    font-weight: 200;
+    border-style: dashed;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#gif {
+
+    height: auto;
+    width: 50%;
+    aspect-ratio: 1;
+    border-radius: 5px;
+    border-color: #080602;
+    background-color: rgba(127, 204, 255, 0.794);
+    align-content: space-evenly;
+}
+
+#gif-2 {
+
+    height: auto;
+    width: 40%;
+    aspect-ratio: 1;
+    border-radius: 5px;
+    border-color: #080602;
+    background-color: rgba(127, 204, 255, 0.794);
+    align-content: space-evenly;
+}
+
+#gif-3 {
+
+    height: auto;
+    width: 25%;
+    aspect-ratio: 1;
+    border-radius: 5px;
+    border-color: #080602;
+    background-color: rgba(127, 204, 255, 0.794);
+    align-content: space-evenly;
+}
+
+#aud {
+    width: 305px;
+    height: 60px;
+    background-color: rgb(61 68 96);
+    padding-top: 2px;
+    border-radius: 10px;
+}
