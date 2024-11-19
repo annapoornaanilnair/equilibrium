@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+
+    background-color: black;
+    background-image: url(images/newback.jpg);
+    background-position: center center;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #080602;
+
+
+
+
+}
+
+#quik a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+#startStopButton {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    background-color: rgba(213, 220, 225, 0.622);
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    min-height: 50px;
+}

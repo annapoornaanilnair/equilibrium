@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="emergency.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <title>Anxiety Calming Module</title>
+</head>
+
+<body>
+    <div id="quik" class="row mb-2">
+        <div class="col"><button type="button" class="btn btn-light">
+                <a href="index.html"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1">
+                        </path>
+                    </svg>
+                    Back</a>
+            </button></div>
+
+        <div class="col " align="right"><button type="button" class="btn btn-light">
+                <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708">
+                        </path>
+                    </svg>
+                    Close</a>
+            </button></div>
+
+    </div>
+    <center>
+        <h1 class="p-5">Anxiety Calming Exercise</h1>
+
+
+
+        <div id="questionSection">
+            <!-- Display questions dynamically -->
+        </div>
+
+        <div class="" id="audioSection">
+            <button class="btn-primary" id="startButton">Start Calming Exercise</button>
+        </div>
+        <div class="p-3"></div>
+        <button id="startStopButton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-mic" viewBox="0 0 16 16">
+                <path
+                    d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5" />
+                <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3" />
+            </svg></button>
+        <div id="result"></div>
+    </center>
+
+
+    <script>
+        const startButton = document.getElementById( 'startButton' );
+        const startStopButton = document.getElementById( 'startStopButton' );
+        const resultDiv = document.getElementById( 'result' );
+        const questionSection = document.getElementById( 'questionSection' );
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.continuous = true;
+        let listening = false;
+
+        // Speech synthesis function for calming questions
+        function speak ( text )
+        {
+            const utterance = new SpeechSynthesisUtterance( text );
+            utterance.pitch = 1; // Calming tone (medium pitch)
+            utterance.rate = 0.9; // Slightly slower speech rate for calming effect
+            utterance.volume = 1; // Full volume
+
+            // Fetch available voices and select "Microsoft Ravi - English (India)"
+            const voices = speechSynthesis.getVoices();
+            const selectedVoice = voices.find( voice => voice.name === "Microsoft Heera - English (India)" );
+
+            // If the voice is available, set it; otherwise, use the default voice
+            if ( selectedVoice )
+            {
+                utterance.voice = selectedVoice;
+            } else
+            {
+                console.warn( "Microsoft Ravi - English (India) voice is not available. Using default voice." );
+            }
+
+            speechSynthesis.speak( utterance );
+        }
+
+
+        // Ask grounding questions with SpeechSynthesis
+        const calmingQuestions = [
+            "Take a deep breath. Name five things you can see around you.",
+            "Now, name four things you can touch.",
+            "Can you hear three sounds in your environment? Name them.",
+            "Think of two things you can smell right now.",
+            "Finally, name one thing you can taste or that you are grateful for."
+        ];
+
+        let currentQuestionIndex = 0;
+
+        // Handle the start button click
+        startButton.addEventListener( 'click', () =>
+        {
+            if ( currentQuestionIndex == 0 )
+            {
+                startButton.textContent = 'NEXT'
+                questionSection.innerHTML = '<p>Please answer the questions I ask you. I will guide you step by step.</p>';
+                speak( "Hello, I am here to help you feel calm. Let's begin the grounding exercise." );
+            }
+
+
+            setTimeout( () =>
+            {
+                askNextQuestion();
+            }, 3000 ); // Wait for 3 seconds before starting the first question
+        } );
+
+        // Function to ask the next question
+        function askNextQuestion ()
+        {
+            if ( currentQuestionIndex < calmingQuestions.length )
+            {
+                speak( calmingQuestions[ currentQuestionIndex ] );
+                questionSection.innerHTML = `<p>${ calmingQuestions[ currentQuestionIndex ] }</p>`;
+                currentQuestionIndex++;
+            } else
+            {
+                speak( "Great job! You have completed the exercise. Take a deep breath and relax." );
+                questionSection.innerHTML = "<p>You have completed the exercise. Take a moment to relax.</p>";
+            }
+        }
+
+        // Start and stop listening for speech
+        startStopButton.addEventListener( 'click', () =>
+        {
+            if ( listening )
+            {
+                recognition.stop();
+                listening = false;
+                startStopButton.textContent = 'Start Listening';
+            } else
+            {
+                recognition.start();
+                listening = true;
+                startStopButton.textContent = 'Stop Listening';
+            }
+        } );
+
+        recognition.onresult = ( event ) =>
+        {
+            let transcript = '';
+            for ( let i = event.resultIndex; i < event.results.length; i++ )
+            {
+                transcript += event.results[ i ][ 0 ].transcript;
+            }
+            resultDiv.innerHTML = transcript; // Display the user’s speech
+        };
+
+        recognition.onerror = ( event ) =>
+        {
+            console.error( "Speech recognition error", event );
+        };
+
+        recognition.onend = () =>
+        {
+            listening = false;
+            startStopButton.textContent = 'Start Listening';
+        };
+    </script>
+</body>
+
+</html>
